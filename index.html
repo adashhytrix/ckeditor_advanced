@@ -1,1 +1,49 @@
-name:hello 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced CKEditor Example with PHP</title>
+    <!-- CKEditor CDN -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+</head>
+<body>
+
+    <h2>Advanced CKEditor Integration with PHP</h2>
+
+    <!-- Form to submit CKEditor content -->
+    <form action="submit.php" method="post" enctype="multipart/form-data">
+        <textarea name="content" id="editor"></textarea>
+        <br>
+        <input type="submit" value="Submit Content">
+    </form>
+
+    <script>
+        // Initialize CKEditor with advanced features
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                toolbar: [
+                    'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|',
+                    'insertTable', 'tableColumn', 'tableRow', 'mergeTableCells', '|',
+                    'undo', 'redo', '|', 'imageUpload', 'mediaEmbed', 'codeBlock'
+                ],
+                ckfinder: {
+                    uploadUrl: 'upload.php'  // Backend endpoint for handling image uploads
+                },
+                mediaEmbed: {
+                    previewsInData: true  // For embedding media like YouTube or Vimeo
+                },
+                table: {
+                    contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
+                },
+                image: {
+                    toolbar: ['imageTextAlternative', 'imageStyle:full', 'imageStyle:side']
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+</body>
+</html>
